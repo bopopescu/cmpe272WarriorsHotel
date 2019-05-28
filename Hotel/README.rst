@@ -45,15 +45,8 @@ Run
 
 Open http://127.0.0.1:5000 in a browser.
 
-
-OLD Text for reference : TODO: Delete after above document is ready!
-=====================================================================
-
-
-
-
-Test
-----
+Test # TODO
+------------
 
 ::
 
@@ -65,3 +58,5 @@ Run with coverage report::
     coverage run -m pytest
     coverage report
     coverage html  # open htmlcov/index.html in a browser
+
+
