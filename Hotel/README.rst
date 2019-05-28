@@ -12,22 +12,24 @@ Team Warriors
 Setting up Project environment
 ------------------------------
 
-Adapting code from Flaskr tutorial
-* Ref: http://flask.pocoo.org/docs/1.0/tutorial/ 
-* Reasons:
-    * Clean code base
-    * Offers production grade deployment
+Adapting code from Flaskr tutorial 
+::
+   * http://flask.pocoo.org/docs/1.0/tutorial/ 
+   * Reasons
+      * Clean code base
+      * Offers production grade deployment
         
-Set up virtual env
+Set up virtual env 
 ::
     cd <GitDir>/cmpe272WarriorsHotel/Hotel
     python3 -m venv venv 
     . venv/bin/activate
 
-Generate Readme file from .rst
-* Ref: http://docutils.sourceforge.net/docs/user/rst/quickref.html 
+Generate Readme file from .rst 
+::
+   http://docutils.sourceforge.net/docs/user/rst/quickref.html 
 
-Install Hotel
+Install Hotel 
 ::
     pip install --upgrade pip   # ensure latest pip
     pip install -e .
