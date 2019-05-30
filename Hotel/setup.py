@@ -6,9 +6,10 @@ with io.open('README.rst', 'rt', encoding='utf8') as f:
     readme = f.read()
 
 setup(
-    name='hotel',
+    name='warriors-hotel',
     version='1.0.0',
     url='https://github.com/YuvaAthur/cmpe272WarriorsHotel',
+    license='BSD',
     maintainer='CMPE 272 Spring - Warriors team',
     maintainer_email='yuva.athur@sjsu.edu',
     description='Hotel rooms browser built in the Flask tutorial.',
