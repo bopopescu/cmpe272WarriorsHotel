@@ -38,9 +38,11 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # apply the blueprints to the app
-    from hotel import auth, blog
+    from hotel import auth, blog, rooms
     app.register_blueprint(auth.bp)
-    app.register_blueprint(blog.bp)
+    # app.register_blueprint(blog.bp)
+    app.register_blueprint(rooms.bp)
+
 
     # make url_for('index') == url_for('blog.index')
     # in another app, you might define a separate main index here with
