@@ -35,6 +35,19 @@ Install Hotel (dev)
     pip install --upgrade pip   # ensure latest pip
     pip install -e .
 
+Setting up Project SQLite file
+    Download data.zip
+    Unzip to local folder
+    Create a new SQLite file
+::
+    sqlite> .open db.sqlite
+    sqlite> .mode csv
+    sqlite> .import /Users/athur/Downloads/data/listings.csv listings
+    sqlite> .import /Users/athur/Downloads/data/reviews.csv reviews
+    sqlite> .import /Users/athur/Downloads/data/calendar.csv calendar
+    sqlite> .exit
+
+Rename db.sqlite to hotel.sqlite and move it to /instance folder
 
 Run
 ----
