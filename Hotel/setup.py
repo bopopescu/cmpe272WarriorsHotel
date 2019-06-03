@@ -22,6 +22,9 @@ setup(
         'flask-wtf',
         'wtforms',
         'wtforms_components',
+        'oauth2client',
+        'flask_oidc',
+        'okta',
     ],
     extras_require={
         'test': [
