@@ -40,7 +40,7 @@ def create_app(test_config=None):
     db.init_app(app)
 
     # apply the blueprints to the app
-    from hotel import auth, blog, rooms
+    from hotel import rooms
     app.register_blueprint(rooms.bp)
 
     # for Okta

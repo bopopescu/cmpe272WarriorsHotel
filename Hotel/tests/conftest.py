@@ -16,6 +16,12 @@ from hotel.okta import get_oidc, init_okta
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
     _data_sql = f.read().decode('utf8')
 
+""" 
+DB Scripts
+select count(*) from listings -- 22895
+select count(*) from reviews  -- 486920
+select count(*) from calendar -- 8356675
+"""
 
 @pytest.fixture
 def app():

@@ -50,9 +50,10 @@ Setting up Project SQLite file
 User workflow
     Pick dates 
     Returns list of available listings for those dates 
-    Choose a listing to see review
+    Choose a listing to see review : Todo
 
-
+SSO Integration
+    Ref: https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xv-a-better-application-structure/page/2
 
 Run
 ----
