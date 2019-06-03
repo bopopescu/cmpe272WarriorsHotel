@@ -1,8 +1,12 @@
 import os
 
 from flask import Flask
+from flask_oidc import OpenIDConnect
+from okta import UsersClient
 
-
+# This is a factory method for productive deployment
+# Use app specific configuration
+# For any app local files, use /instnce Folder
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)
@@ -11,6 +15,11 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         # store the database in the instance folder
         DATABASE=os.path.join(app.instance_path, 'hotel.sqlite'),
+        OIDC_CLIENT_SECRETS=os.path.join(app.instance_path, 'client_secrets.json'),
+        OIDC_COOKIE_SECURE=False,
+        OIDC_CALLBACK_ROUTE= '/oidc/callback',
+        OIDC_SCOPES=["openid", "email", "profile"],
+        OIDC_ID_TOKEN_COOKIE_NAME = 'oidc_token',
     )
 
     if test_config is None:
@@ -26,22 +35,26 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    @app.route('/hello')
-    #@app.route('/')   # - For debugging purposes
-    def hello():
-        return 'Hello, World!'
-
-    #return app
-
     # # register the database commands
     from hotel import db
     db.init_app(app)
 
     # apply the blueprints to the app
     from hotel import auth, blog, rooms
-    app.register_blueprint(auth.bp)
-    # app.register_blueprint(blog.bp)
     app.register_blueprint(rooms.bp)
+
+    # for Okta
+    # Ref: https://www.fullstackpython.com/blog/add-user-authentication-flask-apps-okta.html
+
+    from hotel import okta
+    with app.app_context():
+        okta.init_app(app)
+
+
+
+    @app.route('/hello') # For testing factory method
+    def hello():
+        return 'Hello, World!'
 
 
     # make url_for('index') == url_for('blog.index')

@@ -4,12 +4,13 @@ import sys
 
 import pytest
 
-# Testing flaskr
+# Testing hotel
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import flaskr
+import hotel
 
-from flaskr import create_app
-from flaskr.db import get_db, init_db
+from hotel import create_app
+from hotel.db import get_db, init_db
+from hotel.okta import get_oidc, init_okta
 
 # read in SQL for populating test data
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
