@@ -1,0 +1,56 @@
+
+# best practice structure for .travis.yml
+# ref: https://blog.ionelmc.ro/2014/05/25/python-packaging/#ci-templates-travis-yml
+# ref: https://docs.python-guide.org/writing/structure/
+
+# Debugging Travis
+# Ref: https://stackoverflow.com/questions/21053657/how-to-run-travis-ci-locally
+# Pull docker ci-ruby image: 
+# `sudo docker pull travisci/ci-ruby:packer-1494868441`
+# `docker run -it travisci/ci-ruby:packer-1494868441 /bin/bash'
+# `su - travis`
+# Clone git repository to root
+# Ref: https://stackoverflow.com/questions/9443927/git-clone-into-home-directory/9444352
+# cd ~
+# git init
+# git remote add origin https://github.com/YuvaAthur/cmpe272.git
+# git pull origin master
+# sudo pip install -r requirements.txt
+# pytest
+# Result: 
+#   ALWAYS Travis yaml in the root
+#   pytest discovers test cases in the directory structure
+#   so if pytest runs from repository root, Travis should work right!
+#   Correct version numbers in requirements.txt since pip install fails otherwise
+# Central Travis CI build + test now works!! Yay!!
+
+
+language: python
+#sudo: false
+cache: pip
+python:
+  - "3.4"
+
+# command to install dependencies
+install: "pip install -e ."
+
+# test scripts
+# pytest leverages dir structure + test prefix
+script: pytest
+# script:
+#   - "python test_popsample.py"
+#   - "python test_list_books.py"
+#   - "python test_add_customer.py"
+#   - "python test_new_order.py"
+#   - "python test_updinventory.py"
+#   - "python test_atlas_conn.py"
+
+notifications:
+  email:
+#    on_success: never
+#    on_failure: always
+    recipients:
+#       - senthilanand.govindarajan@sjsu.edu
+#       - pradeep.yadlapalli@sjsu.edu
+       - yuva.athur@sjsu.edu
+#       - sanjeevi.vijayakumar@sjsu.edu 
