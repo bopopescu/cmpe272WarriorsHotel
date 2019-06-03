@@ -40,14 +40,19 @@ Setting up Project SQLite file
     Unzip to local folder
     Create a new SQLite file
 ::
-    sqlite> .open db.sqlite
+    sqlite> .open hotel.sqlite
     sqlite> .mode csv
     sqlite> .import /Users/athur/Downloads/data/listings.csv listings
     sqlite> .import /Users/athur/Downloads/data/reviews.csv reviews
     sqlite> .import /Users/athur/Downloads/data/calendar.csv calendar
     sqlite> .exit
 
-Rename db.sqlite to hotel.sqlite and move it to /instance folder
+User workflow
+    Pick dates 
+    Returns list of available listings for those dates 
+    Choose a listing to see review
+
+
 
 Run
 ----

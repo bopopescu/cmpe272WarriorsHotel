@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Dates Available{% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+<form action="" method="post" >
+    <h2> <font color="FF0000"> Calendar dates </font></h2>
+    <hr>
+        <table>
+            <tr> 
+                <th><font color="FF0000"></font>start_date</font></th>
+                <th><font color="FF0000">end_date</font></th>
+            </tr>    
+                        
+            <tr>
+                <td><input type = "date" id="start_date" name="start_date" placeholder="YYYY-MM-DD" value="{{ request.form['start_date'] }}" required> </td>
+                <td><input type = "date" id="end_date" name="end_date" placeholder="YYYY-MM-DD" value="{{ request.form['end_date'] }}" required> </td>
+            </tr>
+
+        </table>
+    <input type="submit" value="Show Listings">
+
+    
+</form>        
+{% endblock %}

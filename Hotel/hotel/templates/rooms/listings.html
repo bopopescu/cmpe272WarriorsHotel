@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Rooms Availability{% endblock %}</h1>
+{% endblock %}
+
+
+{% block content %}
+<form action="" method="post" >
+<h2> <font color="FF0000"> Available Listings </font></h2>
+<hr>
+    <table>
+        <tr> 
+            <th> Choose Listing </th>
+            <th><font color="FF0000" align="left"> Listing URL</font></th>
+<!--            <th><font color="FF0000" align="center">Date</font></th> -->
+<!--            <th><font color="FF0000">Available</font></th> -->
+            <th><font color="FF0000" align="left"> Price </font></th>
+        </tr>
+    {% for date in dates %}
+        <tr> 
+            <td><input type="radio" id="id_{{date.listing_id}}" name="selected_lsiting" value="{{date.listing_id}}" align="right">
+            <td> <font color="FF00FF" align="right">{{date.listing_url}}</font></td>
+<!--            <td><font color="FF0000" align="center">{{date.date}}</font></td> -->
+<!--            <td> {{date.available}}</td>    -->
+            <td><font color="FF0000" align="right" >{{date.price}}</font></td>
+<!--            <td> {{date.price}}</td> -->
+        </tr>
+    {% endfor %}
+
+    </table>
+
+    <input type="submit" value="Show Review">
+</form>
+{% endblock %}

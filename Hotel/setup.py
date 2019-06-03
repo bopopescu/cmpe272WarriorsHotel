@@ -19,6 +19,9 @@ setup(
     zip_safe=False,
     install_requires=[
         'flask',
+        'flask-wtf',
+        'wtforms',
+        'wtforms_components',
     ],
     extras_require={
         'test': [

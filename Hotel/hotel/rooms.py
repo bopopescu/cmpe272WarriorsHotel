@@ -1,17 +1,19 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, current_app
 )
 from werkzeug.exceptions import abort
 
 from hotel.auth import login_required
 from hotel.db import get_db
+from hotel.forms import DateRangeForm
+import datetime
 
 bp = Blueprint('rooms', __name__)
 
 
 @bp.route('/')
 def index():
-    """Show all the posts, most recent first."""
+    """Show all the listings - raw list."""
     db = get_db()
     dates = db.execute(
         'SELECT l.id, l.listing_url, c.date, c.available, c.price '
@@ -20,6 +22,74 @@ def index():
         'LIMIT 100 '
     ).fetchall()
     return render_template('rooms/index.html', dates=dates)
+
+
+@bp.route('/calendar', methods=('GET', 'POST'))
+def calendar():
+    current_app.dates = []
+    # form = DateRangeForm()
+    # # form = DateRangeForm(datetime.date.today() - datetime.timedelta(days=7), datetime.date.today())
+    # db = get_db()
+    # info = ''
+    # if form.validate():
+    #     start_date = form.start_date.data
+    #     end_date = form.end_date.data
+    #     dates = db.execute(
+    #                     'SELECT l.id, l.listing_url, c.date, c.available, c.price '
+    #                     'FROM calendar c, listings l '
+    #                     'WHERE  (c.price is not "") and (c.listing_id = l.id) ' 
+    #                     'and c.date between ? and ?'
+    #                     'LIMIT 10 ',
+    #                     (start_date,end_date)
+    #             ).fetchall()
+    #     info = '<div>Here be the exchange rate from {start_date} to {end_date}.</div>' \
+    #         .format(start_date=start_date, end_date=end_date)
+    # # else:
+    # #     info = 'calendar: Form validation failed'
+
+    # if info is not None:
+    #     flash(info)
+
+        #   <tr> 
+        #         <td></td>
+        #         <td><h4>{{ form.submit() }}</h4></td>
+        #         <td></td>
+        #     </tr>
+    if request.method == 'POST':
+        start_date = request.form['start_date']
+        end_date = request.form['end_date']
+        error = None
+
+        if not start_date:
+            error = 'start date is required.'
+    
+        if not end_date:
+            error = 'end date is required.'
+
+
+        if error is not None:
+            flash(error)
+        else:    
+            flash("start date  is {start_date} and end date is {end_date}".format(start_date= start_date, end_date= end_date))
+            """Show all the posts, most recent first."""
+            db = get_db()
+            current_app.dates = db.execute(
+                        'SELECT l.id, l.listing_url, c.date, c.available, c.price '
+                        'FROM calendar c, listings l '
+                        'WHERE  (c.price is not "") and (c.listing_id = l.id) ' 
+                        'and c.date between ? and ? '
+                        'GROUP BY l.id '
+                        'LIMIT 10 ',
+                        (start_date,end_date)
+                ).fetchall()
+            return redirect(url_for('rooms.show_listings'))
+    return render_template('rooms/calendar.html', dates=current_app.dates)
+
+@bp.route('/show_listings', methods=('GET', 'POST'))
+def show_listings():
+    dates = current_app.dates
+    return render_template('rooms/listings.html', dates=dates)    
+
 
 
 # def get_post(id, check_author=True):
