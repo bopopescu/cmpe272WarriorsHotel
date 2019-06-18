@@ -78,6 +78,12 @@ def login():
     Resolution:
         * redirecting to /calendar
     """
+    # info = oidc.user_getinfo(['preferred_username', 'email', 'sub'])
+    # id_token = OAuth2Credentials.from_json(oidc.credentials_store[info.get('sub')]).token_response['id_token']
+
+    return redirect(url_for("rooms.calendar"))
+
+"""
     # print('rooms.login entered ', request.url)
     
     # with current_app.app_context:
@@ -89,13 +95,9 @@ def login():
     # print('rooms.login user logged in?', oidc.user_loggedin )
     # return oidc.redirect_to_auth_server(None,request.values)
     # # oidc.redirect_to_auth_server(None,request.url)  # redirect_to_auth_server(request.url)
-    # # info = oidc.user_getinfo(['preferred_username', 'email', 'sub'])
-    # # print ('rooms.login:: oidc info info is',info)
-    # # id_token = OAuth2Credentials.from_json(oidc.credentials_store[info.get('sub')]).token_response['id_token']
-    # # if 'logged_in' not in session:
-    # #     session['logged_in'] = False
-    return redirect(url_for("rooms.calendar"))
  
+""" 
+
 @bp.route('/custom_callback')
 @oidc.custom_callback
 def callback(data):
